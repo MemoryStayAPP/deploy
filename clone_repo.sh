@@ -16,6 +16,6 @@ cd ../MemoryStay/src;
 npm install;
 cd ..;
 npm run build;
-docker run --name docker-nginx -p 8081:80 nginx --mount type=bind,source="$(pwd)"/build,target=/usr/share/nginx/html
+docker run --name docker-nginx -v ./build:/usr/share/nginx/html -p 8081:80 nginx;
 cd ..;
 docker-compose up -d;
