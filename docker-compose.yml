@@ -14,4 +14,7 @@ services:
         # So that Traefik can listen to the Docker events
         - /var/run/docker.sock:/var/run/docker.sock
       networks:
-        - web
+        - web_traefik
+networks:
+  web_traefik:
+    name: web_deploy
