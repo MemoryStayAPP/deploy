@@ -9,6 +9,7 @@ mv laravel/Memory_Stay .;
 rm -rfd laravel;
 mv Memory_Stay laravel;
 cd laravel;
+chmod 777 -R ./*;
 cp .env.example .env;
 composer update;
 ./vendor/bin/sail up -d;
