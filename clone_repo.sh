@@ -12,7 +12,7 @@ cd laravel;
 chmod 777 -R ./*;
 cp .env.example .env;
 composer update;
-docker network create --attachable web
+docker network create --driver bridge web
 ./vendor/bin/sail up -d;
 cd ../MemoryStay/src;
 npm install;
