@@ -18,6 +18,6 @@ cd ../MemoryStay/src;
 npm install;
 cd ..;
 npm run build;
-docker run -d --name docker-nginx -v ./build:/usr/share/nginx/html -p 8081:80 nginx;
+docker run -d --name docker-nginx --label "traefik.http.routers.nginx.rule=Host(`app.memorystay.pl`)" -v ./build:/usr/share/nginx/html -p 8081:80 nginx;
 cd ..;
 docker-compose up -d;
