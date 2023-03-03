@@ -11,7 +11,7 @@ mv Memory_Stay laravel;
 cd laravel;
 chmod 777 -R ./*;
 cp .env.example .env;
-composer update;
+composer update -n;
 # docker network create --driver bridge web
 ./vendor/bin/sail up -d;
 cd ../MemoryStay/src;
