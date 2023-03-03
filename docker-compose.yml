@@ -7,6 +7,7 @@ services:
       command: 
         - "--api.insecure=true" 
         - "--providers.docker=true"
+        - "--traefik.http.routers.traefik.tls=true"
         - "--entrypoints.web.address=:80"
         - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
         - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
