@@ -5,14 +5,15 @@ services:
       image: traefik:v2.9
       # Enables the web UI and tells Traefik to listen to docker
       command: 
-        - "--api.insecure=true" 
-        - "--providers.docker=true"
-        - --providers.file.directory=/etc/traefik/
-        - --providers.file.watch=true
-        - "--entrypoints.web.address=:80"
-        - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-        - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-        - "--entrypoints.websecure.address=:443"
+        #- "--log.level=DEBUG"
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
+      - "--certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory"
+      - "--certificatesresolvers.myresolver.acme.email=igor.zurawski@outlook.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
       ports:
         # The HTTP port
         - "80:80"
@@ -21,8 +22,7 @@ services:
         - "8080:8080"
       volumes:
 #        - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
-        - ./traefik/config.yml:/etc/traefik/config.yml
-        - ./certs:/tools/certs
+        - "./letsencrypt:/letsencrypt"
         # So that Traefik can listen to the Docker events
         - /var/run/docker.sock:/var/run/docker.sock
         
